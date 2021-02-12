@@ -216,9 +216,11 @@ check_font_path = function(path, type)
 #' @param family a character string of maximum 200-byte size,
 #'               indicating the family name of the font.
 #'               See "Details" for further explanation.
-#' @param regular path of the font file for "regular" font face.
+#' @param medium path of the font file for "medium" font face.
 #'                This argument must be specified as a character string
 #'                and cannot be missing.
+#' @param book path of the font file for "book" font face.
+#' @param regular path of the font file for "regular" font face.
 #' @param bold path of the font file for "bold" font face.
 #'             If it is \code{NULL}, the function will use the value of
 #'             argument \code{regular}.
