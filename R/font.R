@@ -305,7 +305,9 @@ check_font_path = function(path, type)
 #' 
 #' }
 font_add = function(family,
-                    regular,
+                    medium,
+                    book = NULL,
+                    regular = NULL,
                     bold = NULL,
                     italic = NULL,
                     bolditalic = NULL,
@@ -322,11 +324,17 @@ font_add = function(family,
     if(nchar(family, type = "bytes") > 200)
         stop("family name is too long (max 200 bytes)")
     
-    r = .Call("load_font", check_font_path(regular, "regular"), PACKAGE = "sysfonts");
+    m = .Call("load_font", check_font_path(medium, "medium"), PACKAGE = "sysfonts");
     
     # If other font faces are not specified, use the regular one
     b = if(is.null(bold)) r
         else .Call("load_font", check_font_path(bold, "bold"), PACKAGE = "sysfonts");
+    
+    bk = if(is.null(bold)) r
+        else .Call("load_font", check_font_path(book, "book"), PACKAGE = "sysfonts");
+    
+    r = if(is.null(regular)) r
+        else .Call("load_font", check_font_path(regular, "regular"), PACKAGE = "sysfonts");
     
     i = if(is.null(italic)) r
         else .Call("load_font", check_font_path(italic, "italic"), PACKAGE = "sysfonts");
@@ -338,7 +346,7 @@ font_add = function(family,
         else .Call("load_font", check_font_path(symbol, "symbol"), PACKAGE = "sysfonts");
     
     lst = .pkg.env$.font.list
-    new_family = list(regular = r, bold = b, italic = i, bolditalic = bi, symbol = s)
+    new_family = list(medium = m, book = bk, regular = r, bold = b, italic = i, bolditalic = bi, symbol = s)
     lst[[family]] = new_family
     .pkg.env$.font.list = lst
     .pkg.env$.font.list.all = c(.pkg.env$.font.list.all, new_family)
