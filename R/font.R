@@ -329,22 +329,22 @@ font_add = function(family,
     m = .Call("load_font", check_font_path(medium, "medium"), PACKAGE = "sysfonts");
     
     # If other font faces are not specified, use the regular one
-    b = if(is.null(bold)) r
+    b = if(is.null(bold)) m
         else .Call("load_font", check_font_path(bold, "bold"), PACKAGE = "sysfonts");
     
-    bk = if(is.null(bold)) r
+    bk = if(is.null(bold)) m
         else .Call("load_font", check_font_path(book, "book"), PACKAGE = "sysfonts");
     
-    r = if(is.null(regular)) r
+    r = if(is.null(regular)) m
         else .Call("load_font", check_font_path(regular, "regular"), PACKAGE = "sysfonts");
     
-    i = if(is.null(italic)) r
+    i = if(is.null(italic)) m
         else .Call("load_font", check_font_path(italic, "italic"), PACKAGE = "sysfonts");
     
-    bi = if(is.null(bolditalic)) r
+    bi = if(is.null(bolditalic)) m
          else .Call("load_font", check_font_path(bolditalic, "bolditalic"), PACKAGE = "sysfonts");
     
-    s = if(is.null(symbol)) r
+    s = if(is.null(symbol)) m
         else .Call("load_font", check_font_path(symbol, "symbol"), PACKAGE = "sysfonts");
     
     lst = .pkg.env$.font.list
